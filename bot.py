@@ -168,6 +168,10 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
                 if not (65 <= curr_rsi <= 71):
                     continue
 
+            # Linkler
+            tv_link = f"https://www.tradingview.com/chart/?symbol=BINANCE:{ticker}.P"
+            binance_futures_link = f"https://www.binance.com/en/futures/{ticker}"
+
             bilgi = {
                 'Zaman Dilimi': periyot_adi,
                 'Coin': ticker,
@@ -175,12 +179,11 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
                 'EMA 20': round(ema20_curr, 4),
                 'Son CCI': round(curr_cci, 2),
                 'Son RSI': round(curr_rsi, 2),
+                'Binance Link': binance_futures_link,
                 'Tarih/Saat': str(df.index[-1])
             }
             results.append(bilgi)
 
-            # 🔗 TradingView Vadeli (Perpetual) Link Formatı (.P eklendi)
-            tv_link = f"https://www.tradingview.com/chart/?symbol=BINANCE:{ticker}.P"
             msg = (
                 f"🚀 *KRİPTO SİNYALİ YAKALANDI*\n"
                 f"*Coin:* `{ticker}`\n"
@@ -188,6 +191,7 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
                 f"*Fiyat:* {close_curr}\n"
                 f"*CCI:* {curr_cci:.2f}\n"
                 f"*RSI (14):* {curr_rsi:.2f} (65-71 Arası)\n\n"
+                f"🔗 [Binance Futures İşlem Aç]({binance_futures_link})\n"
                 f"📈 [{ticker} Vadeli Grafiğini Aç]({tv_link})"
             )
             telegram_mesaj_gonder(msg)
@@ -201,6 +205,6 @@ if results:
     df_results = pd.DataFrame(results)
     df_results = df_results.sort_values(by=['Zaman Dilimi', 'Coin']).reset_index(drop=True)
     df_results.to_excel("Binance_API_Kripto_Sonuclari.xlsx", index=False)
-    print(f"\n✅ Toplam {len(results)} coin tüm filtrelere (CCI, Trend, Hacim ve RSI 65-71) ulaştı ve Excel'e kaydedildi.")
+    print(f"\n✅ Toplam {len(results)} coin tüm filtrelere ulaştı ve Excel'e kaydedildi.")
 else:
     print("\n⚠️ Filtrelere uyan kripto para bulunamadı.")
