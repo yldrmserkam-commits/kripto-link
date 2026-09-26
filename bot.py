@@ -22,7 +22,12 @@ RSI_PERIYOT = 14  # RSI periyodu
 HACIM_FILTRESI_AKTIF = True        
 HACIM_ORT_PERIYOT = 10
 TREND_FILTRESI_AKTIF = True        
-RSI_FILTRESI_AKTIF = True         # RSI Filtresi Aktif (65-71 Arası)
+
+# RSI Filtre Seçenekleri (Hangisini isterseniz True yapabilirsiniz)
+RSI_70_KESISIM_FILTRESI_AKTIF = True   # RSI 70 Seviyesini Yukarı Kesişim Aktif
+RSI_50_KESISIM_FILTRESI_AKTIF = True   # 🚀 RSI 50 Seviyesini Yukarı Kesişim Aktif
+
+GUCLU_DONUS_FILTRESI_AKTIF = True  # Güçlü Dönüş (Dip Tepkisi / Mum Formasyonu) Filtresi
 
 # Telegram Bildirim Ayarları
 TELEGRAM_AKTIF = True
@@ -43,7 +48,7 @@ PERIYOT_AYARLARI = {
     "30 Dakikalık": {"interval": "30m", "limit": 100},
     "1 Saatlik":    {"interval": "1h",  "limit": 100},
     "4 Saatlik":    {"interval": "4h",  "limit": 100},
-    "Günlük":        {"interval": "1d",  "limit": 100}
+    "Günlük":       {"interval": "1d",  "limit": 100}
 }
 
 # Parite Çekme Fonksiyonu
@@ -112,8 +117,6 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
 
     for ticker in tqdm(tickers, desc=f"{periyot_adi} Taranıyor"):
         df = binance_klines_cek(ticker, PERIYOT_AYARLARI[periyot_adi]["interval"], PERIYOT_AYARLARI[periyot_adi]["limit"])
-        
-        # İstekler arası çok kısa bekleme (Rate limit / 429 hatasını önlemek için kritik)
         time.sleep(0.04) 
 
         if df is None or df.empty:
@@ -146,7 +149,9 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
             loss = (-delta.where(delta < 0, 0)).rolling(window=RSI_PERIYOT).mean()
             rs = gain / loss
             rsi = 100 - (100 / (1 + rs))
+            
             curr_rsi = float(rsi.iloc[-1])
+            prev_rsi = float(rsi.iloc[-2])
 
             # 1. CCI Koşulu
             cci_kosulu = (curr_cci > -100) and (curr_cci > prev_cci)
@@ -163,10 +168,62 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
                 if curr_vol <= float(vol_sma.iloc[-1]):
                     continue  
 
-            # 4. RSI Filtresi Koşulu (65 - 71 Arası)
-            if RSI_FILTRESI_AKTIF:
-                if not (65 <= curr_rsi <= 71):
+            # 4. RSI Kesişim Filtreleri (50 veya 70 yukarı kesişim kontrolü)
+            rsi_uygun = True
+            
+            if RSI_70_KESISIM_FILTRESI_AKTIF and not (prev_rsi <= 70 and curr_rsi > 70):
+                rsi_uygun = False
+                
+            if RSI_50_KESISIM_FILTRESI_AKTIF and not (prev_rsi <= 50 and curr_rsi > 50):
+                # Eğer sadece birini seçmek istiyorsanız aşağıdaki mantığı kullanabilirsiniz. 
+                # Şu an ikisi de True ise her ikisini de arar. Eğer "Ya 50'yi ya 70'i kessin" diyorsanız aşağıda esnetebiliriz.
+                pass
+
+            # Daha esnek bir mantık (RSI 50 veya 70 kesişimlerinden *herhangi birini* sağlaması için):
+            kesisim_sarti_saglandi = False
+            aktif_filtre_sayisi = 0
+            
+            if RSI_70_KESISIM_FILTRESI_AKTIF:
+                aktif_filtre_sayisi += 1
+                if prev_rsi <= 70 and curr_rsi > 70:
+                    kesisim_sarti_saglandi = True
+                    
+            if RSI_50_KESISIM_FILTRESI_AKTIF:
+                aktif_filtre_sayisi += 1
+                if prev_rsi <= 50 and curr_rsi > 50:
+                    kesisim_sarti_saglandi = True
+            
+            # Eğer filtreler aktifse ama hiçbiri tutmadıysa geç
+            if aktif_filtre_sayisi > 0 and not kesisim_sarti_saglandi:
+                continue
+
+            # 5. Güçlü Dönüş (Reversal) Koşulu
+            if GUCLU_DONUS_FILTRESI_AKTIF:
+                o_curr = float(df['Open'].iloc[-1])
+                h_curr = float(df['High'].iloc[-1])
+                l_curr = float(df['Low'].iloc[-1])
+                c_curr = float(df['Close'].iloc[-1])
+                
+                body_size = abs(c_curr - o_curr)
+                total_range = h_curr - l_curr
+                
+                if total_range == 0:
                     continue
+                
+                lower_shadow = min(o_curr, c_curr) - l_curr
+                alt_fitil_orani = lower_shadow / total_range
+                yesil_mum = c_curr > o_curr
+                
+                guclu_donus_isareti = yesil_mum and (alt_fitil_orani >= 0.25 or (body_size / total_range) >= 0.4)
+                if not guclu_donus_isareti:
+                    continue
+
+            # Hangi kesişimin gerçekleştiğini mesajda belirtmek için dinamik metin
+            kesisim_bilgisi = "RSI Kesişimi Gerçekleşti"
+            if prev_rsi <= 50 and curr_rsi > 50:
+                kesisim_bilgisi = "RSI 50 Seviyesini Yukarı Kesti!"
+            elif prev_rsi <= 70 and curr_rsi > 70:
+                kesisim_bilgisi = "RSI 70 Seviyesini Yukarı Kesti!"
 
             # Linkler
             tv_link = f"https://www.tradingview.com/chart/?symbol=BINANCE:{ticker}.P"
@@ -185,12 +242,14 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
             results.append(bilgi)
 
             msg = (
-                f"🚀 *KRİPTO SİNYALİ YAKALANDI*\n"
+                f"🚀 *RSI KESİŞİM & GÜÇLÜ DÖNÜŞ SİNYALİ*\n"
                 f"*Coin:* `{ticker}`\n"
                 f"*Periyot:* {periyot_adi}\n"
                 f"*Fiyat:* {close_curr}\n"
                 f"*CCI:* {curr_cci:.2f}\n"
-                f"*RSI (14):* {curr_rsi:.2f} (65-71 Arası)\n\n"
+                f"*RSI (14):* {curr_rsi:.2f} (Önceki: {prev_rsi:.2f})\n"
+                f"🎯 *Durum:* {kesisim_bilgisi}\n"
+                f"✨ *Formasyon:* Güçlü Dönüş Mumu Onaylandı\n\n"
                 f"🔗 [Binance Futures İşlem Aç]({binance_futures_link})\n"
                 f"📈 [{ticker} Vadeli Grafiğini Aç]({tv_link})"
             )
@@ -204,7 +263,7 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
 if results:
     df_results = pd.DataFrame(results)
     df_results = df_results.sort_values(by=['Zaman Dilimi', 'Coin']).reset_index(drop=True)
-    df_results.to_excel("Binance_API_Kripto_Sonuclari.xlsx", index=False)
+    df_results.to_excel("Binance_RSI_Kesisim_Ve_Donus_Sonuclari.xlsx", index=False)
     print(f"\n✅ Toplam {len(results)} coin tüm filtrelere ulaştı ve Excel'e kaydedildi.")
 else:
     print("\n⚠️ Filtrelere uyan kripto para bulunamadı.")
