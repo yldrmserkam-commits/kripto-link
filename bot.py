@@ -22,12 +22,8 @@ RSI_PERIYOT = 14  # RSI periyodu
 HACIM_FILTRESI_AKTIF = True        
 HACIM_ORT_PERIYOT = 10
 TREND_FILTRESI_AKTIF = True        
-
-# RSI Filtre Seçenekleri (Hangisini isterseniz True yapabilirsiniz)
-RSI_70_KESISIM_FILTRESI_AKTIF = True   # RSI 70 Seviyesini Yukarı Kesişim Aktif
-RSI_50_KESISIM_FILTRESI_AKTIF = True   # 🚀 RSI 50 Seviyesini Yukarı Kesişim Aktif
-
-GUCLU_DONUS_FILTRESI_AKTIF = True  # Güçlü Dönüş (Dip Tepkisi / Mum Formasyonu) Filtresi
+RSI_70_ARALIK_FILTRESI_AKTIF = True    # 🚀 RSI 70-72 Aralığı (Yeni Kesişim) Filtresi Aktif
+GUCLU_DONUS_FILTRESI_AKTIF = True      # Güçlü Dönüş (Dip Tepkisi / Mum Formasyonu) Filtresi
 
 # Telegram Bildirim Ayarları
 TELEGRAM_AKTIF = True
@@ -168,34 +164,10 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
                 if curr_vol <= float(vol_sma.iloc[-1]):
                     continue  
 
-            # 4. RSI Kesişim Filtreleri (50 veya 70 yukarı kesişim kontrolü)
-            rsi_uygun = True
-            
-            if RSI_70_KESISIM_FILTRESI_AKTIF and not (prev_rsi <= 70 and curr_rsi > 70):
-                rsi_uygun = False
-                
-            if RSI_50_KESISIM_FILTRESI_AKTIF and not (prev_rsi <= 50 and curr_rsi > 50):
-                # Eğer sadece birini seçmek istiyorsanız aşağıdaki mantığı kullanabilirsiniz. 
-                # Şu an ikisi de True ise her ikisini de arar. Eğer "Ya 50'yi ya 70'i kessin" diyorsanız aşağıda esnetebiliriz.
-                pass
-
-            # Daha esnek bir mantık (RSI 50 veya 70 kesişimlerinden *herhangi birini* sağlaması için):
-            kesisim_sarti_saglandi = False
-            aktif_filtre_sayisi = 0
-            
-            if RSI_70_KESISIM_FILTRESI_AKTIF:
-                aktif_filtre_sayisi += 1
-                if prev_rsi <= 70 and curr_rsi > 70:
-                    kesisim_sarti_saglandi = True
-                    
-            if RSI_50_KESISIM_FILTRESI_AKTIF:
-                aktif_filtre_sayisi += 1
-                if prev_rsi <= 50 and curr_rsi > 50:
-                    kesisim_sarti_saglandi = True
-            
-            # Eğer filtreler aktifse ama hiçbiri tutmadıysa geç
-            if aktif_filtre_sayisi > 0 and not kesisim_sarti_saglandi:
-                continue
+            # 4. 🚀 RSI 70-72 Aralığı Kesişim Koşulu (Önceki <= 70, Şimdiki 70 ile 72 arasında)
+            if RSI_70_ARALIK_FILTRESI_AKTIF:
+                if not (prev_rsi <= 70 and 70 < curr_rsi <= 72):
+                    continue
 
             # 5. Güçlü Dönüş (Reversal) Koşulu
             if GUCLU_DONUS_FILTRESI_AKTIF:
@@ -218,13 +190,6 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
                 if not guclu_donus_isareti:
                     continue
 
-            # Hangi kesişimin gerçekleştiğini mesajda belirtmek için dinamik metin
-            kesisim_bilgisi = "RSI Kesişimi Gerçekleşti"
-            if prev_rsi <= 50 and curr_rsi > 50:
-                kesisim_bilgisi = "RSI 50 Seviyesini Yukarı Kesti!"
-            elif prev_rsi <= 70 and curr_rsi > 70:
-                kesisim_bilgisi = "RSI 70 Seviyesini Yukarı Kesti!"
-
             # Linkler
             tv_link = f"https://www.tradingview.com/chart/?symbol=BINANCE:{ticker}.P"
             binance_futures_link = f"https://www.binance.com/en/futures/{ticker}"
@@ -242,13 +207,12 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
             results.append(bilgi)
 
             msg = (
-                f"🚀 *RSI KESİŞİM & GÜÇLÜ DÖNÜŞ SİNYALİ*\n"
+                f"🚀 *RSI 70-72 YENİ KESİŞİM SİNYALİ*\n"
                 f"*Coin:* `{ticker}`\n"
                 f"*Periyot:* {periyot_adi}\n"
                 f"*Fiyat:* {close_curr}\n"
                 f"*CCI:* {curr_cci:.2f}\n"
-                f"*RSI (14):* {curr_rsi:.2f} (Önceki: {prev_rsi:.2f})\n"
-                f"🎯 *Durum:* {kesisim_bilgisi}\n"
+                f"*RSI (14):* {curr_rsi:.2f} (Önceki: {prev_rsi:.2f} -> 70-72 Aralığında!)\n"
                 f"✨ *Formasyon:* Güçlü Dönüş Mumu Onaylandı\n\n"
                 f"🔗 [Binance Futures İşlem Aç]({binance_futures_link})\n"
                 f"📈 [{ticker} Vadeli Grafiğini Aç]({tv_link})"
@@ -263,7 +227,7 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
 if results:
     df_results = pd.DataFrame(results)
     df_results = df_results.sort_values(by=['Zaman Dilimi', 'Coin']).reset_index(drop=True)
-    df_results.to_excel("Binance_RSI_Kesisim_Ve_Donus_Sonuclari.xlsx", index=False)
+    df_results.to_excel("Binance_RSI70_72_Sonuclari.xlsx", index=False)
     print(f"\n✅ Toplam {len(results)} coin tüm filtrelere ulaştı ve Excel'e kaydedildi.")
 else:
     print("\n⚠️ Filtrelere uyan kripto para bulunamadı.")
