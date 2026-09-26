@@ -16,14 +16,18 @@ TARAMA_YAPILACAK_PERIYOTLAR = {
 
 CCI_PERIYOT = 20  
 EMA_TREND = 20    
-RSI_PERIYOT = 14  # RSI periyodu
+RSI_PERIYOT = 14  
 
 # --- FİLTRE AKTİFLİK AYARLARI ---
 HACIM_FILTRESI_AKTIF = True        
 HACIM_ORT_PERIYOT = 10
 TREND_FILTRESI_AKTIF = True        
-RSI_70_ARALIK_FILTRESI_AKTIF = True    # 🚀 RSI 70-72 Aralığı (Yeni Kesişim) Filtresi Aktif
-GUCLU_DONUS_FILTRESI_AKTIF = True      # Güçlü Dönüş (Dip Tepkisi / Mum Formasyonu) Filtresi
+RSI_70_ARALIK_FILTRESI_AKTIF = True    
+GUCLU_DONUS_FILTRESI_AKTIF =      True      
+
+# 🚀 TEKRARLI BİLDİRİMİ ÖNLEME HAFIZASI
+# Aynı coin ve periyotta tekrar tekrar bildirim atılmasını engeller
+GONDERILEN_SINYALLER = set()
 
 # Telegram Bildirim Ayarları
 TELEGRAM_AKTIF = True
@@ -71,7 +75,7 @@ def binance_aktif_usdt_listesini_getir():
 tickers = binance_aktif_usdt_listesini_getir()
 print(f"✅ Binance'ten toplam {len(tickers)} adet aktif USDT paritesi çekildi.")
 
-# 🚀 Yedekli ve İstek Sınırı Korumalı Mum Çekme Fonksiyonu
+# Mum Çekme Fonksiyonu
 def binance_klines_cek(symbol, interval, limit=100):
     urls = [
         "https://api.binance.com/api/v3/klines",
@@ -164,7 +168,7 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
                 if curr_vol <= float(vol_sma.iloc[-1]):
                     continue  
 
-            # 4. 🚀 RSI 70-72 Aralığı Kesişim Koşulu (Önceki <= 70, Şimdiki 70 ile 72 arasında)
+            # 4. RSI 70-72 Aralığı Kesişim Koşulu
             if RSI_70_ARALIK_FILTRESI_AKTIF:
                 if not (prev_rsi <= 70 and 70 < curr_rsi <= 72):
                     continue
@@ -190,6 +194,17 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
                 if not guclu_donus_isareti:
                     continue
 
+            # 🚀 Benzersiz Sinyal İmzası Oluştur (Coin + Periyot + Son Mum Zamanı)
+            # Bu sayede aynı mum periyodunda ve aynı coinde bildirim sadece 1 kez atılır.
+            son_mum_zamani = str(df.index[-1])
+            sinyal_kimligi = f"{ticker}_{periyot_adi}_{son_mum_zamani}"
+
+            if sinyal_kimligi in GONDERILEN_SINYALLER:
+                continue  # Bu sinyal daha önce gönderilmiş, atla!
+
+            # Sinyal yeni olduğu için hafızaya ekle
+            GONDERILEN_SINYALLER.add(sinyal_kimligi)
+
             # Linkler
             tv_link = f"https://www.tradingview.com/chart/?symbol=BINANCE:{ticker}.P"
             binance_futures_link = f"https://www.binance.com/en/futures/{ticker}"
@@ -202,17 +217,17 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
                 'Son CCI': round(curr_cci, 2),
                 'Son RSI': round(curr_rsi, 2),
                 'Binance Link': binance_futures_link,
-                'Tarih/Saat': str(df.index[-1])
+                'Tarih/Saat': son_mum_zamani
             }
             results.append(bilgi)
 
             msg = (
-                f"🚀 *RSI 70-72 YENİ KESİŞİM SİNYALİ*\n"
+                f"🚀 *YENİ ANLIK RSI 70-72 KESİŞİM SİNYALİ*\n"
                 f"*Coin:* `{ticker}`\n"
                 f"*Periyot:* {periyot_adi}\n"
                 f"*Fiyat:* {close_curr}\n"
                 f"*CCI:* {curr_cci:.2f}\n"
-                f"*RSI (14):* {curr_rsi:.2f} (Önceki: {prev_rsi:.2f} -> 70-72 Aralığında!)\n"
+                f"*RSI (14):* {curr_rsi:.2f} (Önceki: {prev_rsi:.2f})\n"
                 f"✨ *Formasyon:* Güçlü Dönüş Mumu Onaylandı\n\n"
                 f"🔗 [Binance Futures İşlem Aç]({binance_futures_link})\n"
                 f"📈 [{ticker} Vadeli Grafiğini Aç]({tv_link})"
@@ -227,7 +242,7 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
 if results:
     df_results = pd.DataFrame(results)
     df_results = df_results.sort_values(by=['Zaman Dilimi', 'Coin']).reset_index(drop=True)
-    df_results.to_excel("Binance_RSI70_72_Sonuclari.xlsx", index=False)
-    print(f"\n✅ Toplam {len(results)} coin tüm filtrelere ulaştı ve Excel'e kaydedildi.")
+    df_results.to_excel("Binance_RSI70_72_Anlik_Sonuclari.xlsx", index=False)
+    print(f"\n✅ Toplam {len(results)} yeni sinyal bulundu ve Excel'e kaydedildi.")
 else:
-    print("\n⚠️ Filtrelere uyan kripto para bulunamadı.")
+    print("\n⚠️ Bu taramada yeni (daha önce gönderilmemiş) sinyal bulunamadı.")
