@@ -34,10 +34,11 @@ def sinyalleri_kaydet(state):
 
 # --- KRİPTO AYARLARI ---
 TARAMA_YAPILACAK_PERIYOTLAR = {
+    "15 Dakikalık": True,
     "30 Dakikalık": True,
-    "1 Saatlik": True,
-    "4 Saatlik": True,
-    "Günlük": True,
+    "1 Saatlik":    False,
+    "4 Saatlik":    False,
+    "Günlük":       False,
 }
 
 EMA_HIZLI = 5
@@ -66,6 +67,7 @@ def telegram_mesaj_gonder(mesaj):
         print(f"Telegram mesajı gönderilemedi: {e}")
 
 PERIYOT_AYARLARI = {
+    "15 Dakikalık": {"interval": "15m", "limit": 120},
     "30 Dakikalık": {"interval": "30m", "limit": 120},
     "1 Saatlik":    {"interval": "1h",  "limit": 120},
     "4 Saatlik":    {"interval": "4h",  "limit": 120},
@@ -208,8 +210,17 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
             if not adx_kesisim:
                 continue
 
-            # 🚀 5. TEKRARLI BİLDİRİMİ ENGELLEME (Coin + Periyot Bazlı Günlük Kısıtlama)
-            sinyal_kimligi = f"{ticker}_{periyot_adi}_EMA_RSI_ADX"
+            # 5. OBV (On-Balance Volume) Yukarı Yönlü Koşulu
+            obv = (np.sign(df['Close'].diff()) * df['Volume']).fillna(0).cumsum()
+            curr_obv = float(obv.iloc[-1])
+            prev_obv = float(obv.iloc[-2])
+
+            obv_kosulu = curr_obv > prev_obv
+            if not obv_kosulu:
+                continue
+
+            # 🚀 6. TEKRARLI BİLDİRİMİ ENGELLEME (Coin + Periyot Bazlı Günlük Kısıtlama)
+            sinyal_kimligi = f"{ticker}_{periyot_adi}_EMA_RSI_ADX_OBV"
 
             if sinyal_kimligi in gonderilenler:
                 continue  
@@ -230,6 +241,7 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
                 'Son RSI': round(curr_rsi, 2),
                 'Son +DI': round(curr_plus_di, 2),
                 'Son -DI': round(curr_minus_di, 2),
+                'Son OBV': round(curr_obv, 2),
                 'Binance Link': binance_futures_link,
                 'Tarih/Saat': str(df.index[-1])
             }
@@ -243,7 +255,8 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
                 f"📈 *EMA 5 ({curr_ema5:.2f}) > EMA 8 ({curr_ema8:.2f}) Kesti*\n"
                 f"📊 *Fiyat EMA 20 Üstünde ({curr_ema20:.2f})*\n"
                 f"*RSI (14):* {curr_rsi:.2f} (>48 ve Yön Yukarı)\n"
-                f"*+DI / -DI Kesişimi:* `+DI ({curr_plus_di:.2f}) > -DI ({curr_minus_di:.2f})`\n\n"
+                f"*+DI / -DI Kesişimi:* `+DI ({curr_plus_di:.2f}) > -DI ({curr_minus_di:.2f})`\n"
+                f"📊 *OBV:* Yön Yukarı (`{curr_obv:.0f}` > `{prev_obv:.0f}`)\n\n"
                 f"🔗 [Binance Futures İşlem Aç]({binance_futures_link})\n"
                 f"📈 [{ticker} Vadeli Grafiğini Aç]({tv_link})"
             )
