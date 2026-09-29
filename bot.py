@@ -1,10 +1,36 @@
-import pandas as pd
-import numpy as np
 import time
+import os
+import json
+import warnings
+import numpy as np
+import pandas as pd
 import requests
 from tqdm import tqdm
-import warnings
+
 warnings.filterwarnings('ignore')
+
+# --- SİNYAL TAKİP DOSYASI AYARI (GitHub Actions State Koruması) ---
+STATE_FILE = "kripto_gonderilen_sinyaller.json"
+
+def sinyalleri_yukle():
+    if os.path.exists(STATE_FILE):
+        try:
+            with open(STATE_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                bugun = time.strftime('%Y-%m-%d')
+                if data.get("_tarih") != bugun:
+                    return {"_tarih": bugun}
+                return data
+        except Exception:
+            return {"_tarih": time.strftime('%Y-%m-%d')}
+    return {"_tarih": time.strftime('%Y-%m-%d')}
+
+def sinyalleri_kaydet(state):
+    try:
+        with open(STATE_FILE, "w", encoding="utf-8") as f:
+            json.dump(state, f, ensure_ascii=False, indent=4)
+    except Exception as e:
+        print(f"Durum dosyası kaydedilemedi: {e}")
 
 # --- KRİPTO AYARLARI ---
 TARAMA_YAPILACAK_PERIYOTLAR = {
@@ -14,20 +40,14 @@ TARAMA_YAPILACAK_PERIYOTLAR = {
     "Günlük": True,
 }
 
-CCI_PERIYOT = 20  
-EMA_TREND = 20    
+EMA_HIZLI = 5
+EMA_YAVAS = 8
+EMA_TREND = 20      
 RSI_PERIYOT = 14  
+ADX_PERIYOT = 14   
 
-# --- FİLTRE AKTİFLİK AYARLARI ---
-HACIM_FILTRESI_AKTIF = True        
-HACIM_ORT_PERIYOT = 10
-TREND_FILTRESI_AKTIF = True        
-RSI_70_ARALIK_FILTRESI_AKTIF = True    
-GUCLU_DONUS_FILTRESI_AKTIF =      True      
-
-# 🚀 TEKRARLI BİLDİRİMİ ÖNLEME HAFIZASI
-# Aynı coin ve periyotta tekrar tekrar bildirim atılmasını engeller
-GONDERILEN_SINYALLER = set()
+# 🚀 HAFIZA YÜKLEMESİ (Coin + Periyot Bazlı Günlük Kısıtlama)
+gonderilenler = sinyalleri_yukle()
 
 # Telegram Bildirim Ayarları
 TELEGRAM_AKTIF = True
@@ -41,17 +61,17 @@ def telegram_mesaj_gonder(mesaj):
         url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
         payload = {"chat_id": TELEGRAM_CHAT_ID, "text": mesaj, "parse_mode": "Markdown", "disable_web_page_preview": True}
         requests.post(url, json=payload, timeout=5)
+        time.sleep(0.3)
     except Exception as e:
         print(f"Telegram mesajı gönderilemedi: {e}")
 
 PERIYOT_AYARLARI = {
-    "30 Dakikalık": {"interval": "30m", "limit": 100},
-    "1 Saatlik":    {"interval": "1h",  "limit": 100},
-    "4 Saatlik":    {"interval": "4h",  "limit": 100},
-    "Günlük":       {"interval": "1d",  "limit": 100}
+    "30 Dakikalık": {"interval": "30m", "limit": 120},
+    "1 Saatlik":    {"interval": "1h",  "limit": 120},
+    "4 Saatlik":    {"interval": "4h",  "limit": 120},
+    "Günlük":       {"interval": "1d",  "limit": 120}
 }
 
-# Parite Çekme Fonksiyonu
 def binance_aktif_usdt_listesini_getir():
     urls = [
         "https://api.binance.com/api/v3/exchangeInfo",
@@ -75,8 +95,7 @@ def binance_aktif_usdt_listesini_getir():
 tickers = binance_aktif_usdt_listesini_getir()
 print(f"✅ Binance'ten toplam {len(tickers)} adet aktif USDT paritesi çekildi.")
 
-# Mum Çekme Fonksiyonu
-def binance_klines_cek(symbol, interval, limit=100):
+def binance_klines_cek(symbol, interval, limit=120):
     urls = [
         "https://api.binance.com/api/v3/klines",
         "https://data-api.binance.vision/api/v3/klines",
@@ -90,7 +109,8 @@ def binance_klines_cek(symbol, interval, limit=100):
             response = requests.get(url, params=params, headers=headers, timeout=4)
             if response.status_code == 200:
                 data = response.json()
-                if not data or len(data) < max(CCI_PERIYOT + 5, RSI_PERIYOT + 5, 25):
+                min_gerekli = max(EMA_TREND + 5, RSI_PERIYOT + 5, ADX_PERIYOT * 2 + 5, 30)
+                if not data or len(data) < min_gerekli:
                     return None
                 df = pd.DataFrame(data, columns=[
                     'Open_time', 'Open', 'High', 'Low', 'Close', 'Volume',
@@ -125,25 +145,28 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
         basarili_sayisi += 1
 
         try:
-            curr_vol = float(df['Volume'].iloc[-1])
-            if curr_vol == 0:
+            close_curr = float(df['Close'].iloc[-1])
+
+            # 1. EMA 5 ve EMA 8 Kesişim Koşulu
+            ema5 = df['Close'].ewm(span=EMA_HIZLI, adjust=False).mean()
+            ema8 = df['Close'].ewm(span=EMA_YAVAS, adjust=False).mean()
+            
+            curr_ema5 = float(ema5.iloc[-1])
+            prev_ema5 = float(ema5.iloc[-2])
+            curr_ema8 = float(ema8.iloc[-1])
+            prev_ema8 = float(ema8.iloc[-2])
+
+            ema_kesisim = (prev_ema5 <= prev_ema8) and (curr_ema5 > curr_ema8)
+            if not ema_kesisim:
                 continue
 
+            # 2. Fiyat > EMA 20 Koşulu
             ema20 = df['Close'].ewm(span=EMA_TREND, adjust=False).mean()
-            close_curr = float(df['Close'].iloc[-1])
-            ema20_curr = float(ema20.iloc[-1])
+            curr_ema20 = float(ema20.iloc[-1])
+            if close_curr <= curr_ema20:
+                continue
 
-            # CCI Hesabı
-            tp = (df['High'] + df['Low'] + df['Close']) / 3
-            sma_tp = tp.rolling(window=CCI_PERIYOT).mean()
-            mad = tp.rolling(window=CCI_PERIYOT).apply(lambda x: np.abs(x - x.mean()).mean(), raw=True)
-            mad_safe = np.where(mad == 0, 0.0001, mad)
-            cci = (tp - sma_tp) / (0.015 * mad_safe)
-
-            curr_cci = float(cci.iloc[-1])
-            prev_cci = float(cci.iloc[-2])
-
-            # RSI Hesabı (14 Periyot)
+            # 3. RSI 48 Üstü ve Yukarı Yönlü Koşulu
             delta = df['Close'].diff()
             gain = (delta.where(delta > 0, 0)).rolling(window=RSI_PERIYOT).mean()
             loss = (-delta.where(delta < 0, 0)).rolling(window=RSI_PERIYOT).mean()
@@ -153,57 +176,45 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
             curr_rsi = float(rsi.iloc[-1])
             prev_rsi = float(rsi.iloc[-2])
 
-            # 1. CCI Koşulu
-            cci_kosulu = (curr_cci > -100) and (curr_cci > prev_cci)
-            if not cci_kosulu:
+            rsi_kosulu = (curr_rsi > 48) and (curr_rsi > prev_rsi)
+            if not rsi_kosulu:
                 continue
 
-            # 2. Trend Filtresi Koşulu
-            if TREND_FILTRESI_AKTIF and close_curr < ema20_curr:
+            # 4. ADX / (+DI / -DI) Yukarı Kesişim Koşulu
+            high = df['High']
+            low = df['Low']
+            close = df['Close']
+            
+            plus_dm = high.diff()
+            minus_dm = low.diff()
+            plus_dm = np.where((plus_dm > minus_dm) & (plus_dm > 0), plus_dm, 0.0)
+            minus_dm = np.where((minus_dm > plus_dm) & (minus_dm > 0), minus_dm, 0.0)
+            
+            tr1 = high - low
+            tr2 = np.abs(high - close.shift(1))
+            tr3 = np.abs(low - close.shift(1))
+            tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+            
+            atr = tr.ewm(alpha=1/ADX_PERIYOT, adjust=False).mean()
+            plus_di = 100 * pd.Series(plus_dm, index=df.index).ewm(alpha=1/ADX_PERIYOT, adjust=False).mean() / atr
+            minus_di = 100 * pd.Series(minus_dm, index=df.index).ewm(alpha=1/ADX_PERIYOT, adjust=False).mean() / atr
+            
+            curr_plus_di = float(plus_di.iloc[-1])
+            prev_plus_di = float(plus_di.iloc[-2])
+            curr_minus_di = float(minus_di.iloc[-1])
+            prev_minus_di = float(minus_di.iloc[-2])
+
+            adx_kesisim = (prev_plus_di <= prev_minus_di) and (curr_plus_di > curr_minus_di)
+            if not adx_kesisim:
+                continue
+
+            # 🚀 5. TEKRARLI BİLDİRİMİ ENGELLEME (Coin + Periyot Bazlı Günlük Kısıtlama)
+            sinyal_kimligi = f"{ticker}_{periyot_adi}_EMA_RSI_ADX"
+
+            if sinyal_kimligi in gonderilenler:
                 continue  
 
-            # 3. Hacim Filtresi Koşulu
-            if HACIM_FILTRESI_AKTIF:
-                vol_sma = df['Volume'].rolling(window=HACIM_ORT_PERIYOT).mean()
-                if curr_vol <= float(vol_sma.iloc[-1]):
-                    continue  
-
-            # 4. RSI 70-72 Aralığı Kesişim Koşulu
-            if RSI_70_ARALIK_FILTRESI_AKTIF:
-                if not (prev_rsi <= 70 and 70 < curr_rsi <= 72):
-                    continue
-
-            # 5. Güçlü Dönüş (Reversal) Koşulu
-            if GUCLU_DONUS_FILTRESI_AKTIF:
-                o_curr = float(df['Open'].iloc[-1])
-                h_curr = float(df['High'].iloc[-1])
-                l_curr = float(df['Low'].iloc[-1])
-                c_curr = float(df['Close'].iloc[-1])
-                
-                body_size = abs(c_curr - o_curr)
-                total_range = h_curr - l_curr
-                
-                if total_range == 0:
-                    continue
-                
-                lower_shadow = min(o_curr, c_curr) - l_curr
-                alt_fitil_orani = lower_shadow / total_range
-                yesil_mum = c_curr > o_curr
-                
-                guclu_donus_isareti = yesil_mum and (alt_fitil_orani >= 0.25 or (body_size / total_range) >= 0.4)
-                if not guclu_donus_isareti:
-                    continue
-
-            # 🚀 Benzersiz Sinyal İmzası Oluştur (Coin + Periyot + Son Mum Zamanı)
-            # Bu sayede aynı mum periyodunda ve aynı coinde bildirim sadece 1 kez atılır.
-            son_mum_zamani = str(df.index[-1])
-            sinyal_kimligi = f"{ticker}_{periyot_adi}_{son_mum_zamani}"
-
-            if sinyal_kimligi in GONDERILEN_SINYALLER:
-                continue  # Bu sinyal daha önce gönderilmiş, atla!
-
-            # Sinyal yeni olduğu için hafızaya ekle
-            GONDERILEN_SINYALLER.add(sinyal_kimligi)
+            gonderilenler[sinyal_kimligi] = True
 
             # Linkler
             tv_link = f"https://www.tradingview.com/chart/?symbol=BINANCE:{ticker}.P"
@@ -213,36 +224,43 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
                 'Zaman Dilimi': periyot_adi,
                 'Coin': ticker,
                 'Son Kapanis': round(close_curr, 4),
-                'EMA 20': round(ema20_curr, 4),
-                'Son CCI': round(curr_cci, 2),
+                'EMA 5': round(curr_ema5, 4),
+                'EMA 8': round(curr_ema8, 4),
+                'EMA 20': round(curr_ema20, 4),
                 'Son RSI': round(curr_rsi, 2),
+                'Son +DI': round(curr_plus_di, 2),
+                'Son -DI': round(curr_minus_di, 2),
                 'Binance Link': binance_futures_link,
-                'Tarih/Saat': son_mum_zamani
+                'Tarih/Saat': str(df.index[-1])
             }
             results.append(bilgi)
 
             msg = (
-                f"🚀 *YENİ ANLIK RSI 70-72 KESİŞİM SİNYALİ*\n"
+                f"🚀 *KATI KURALLI YENİ STRATEJİ SİNYALİ*\n"
                 f"*Coin:* `{ticker}`\n"
                 f"*Periyot:* {periyot_adi}\n"
                 f"*Fiyat:* {close_curr}\n"
-                f"*CCI:* {curr_cci:.2f}\n"
-                f"*RSI (14):* {curr_rsi:.2f} (Önceki: {prev_rsi:.2f})\n"
-                f"✨ *Formasyon:* Güçlü Dönüş Mumu Onaylandı\n\n"
+                f"📈 *EMA 5 ({curr_ema5:.2f}) > EMA 8 ({curr_ema8:.2f}) Kesti*\n"
+                f"📊 *Fiyat EMA 20 Üstünde ({curr_ema20:.2f})*\n"
+                f"*RSI (14):* {curr_rsi:.2f} (>48 ve Yön Yukarı)\n"
+                f"*+DI / -DI Kesişimi:* `+DI ({curr_plus_di:.2f}) > -DI ({curr_minus_di:.2f})`\n\n"
                 f"🔗 [Binance Futures İşlem Aç]({binance_futures_link})\n"
                 f"📈 [{ticker} Vadeli Grafiğini Aç]({tv_link})"
             )
             telegram_mesaj_gonder(msg)
 
-        except Exception as e:
+        except Exception:
             pass
 
     print(f"\nℹ️ Başarıyla taranan geçerli coin sayısı: {basarili_sayisi}")
 
+# Takip dosyasını GitHub repoda saklanmak üzere güncelle
+sinyalleri_kaydet(gonderilenler)
+
 if results:
     df_results = pd.DataFrame(results)
     df_results = df_results.sort_values(by=['Zaman Dilimi', 'Coin']).reset_index(drop=True)
-    df_results.to_excel("Binance_RSI70_72_Anlik_Sonuclari.xlsx", index=False)
+    df_results.to_excel("Binance_Katı_Kuralli_Sonuclar.xlsx", index=False)
     print(f"\n✅ Toplam {len(results)} yeni sinyal bulundu ve Excel'e kaydedildi.")
 else:
     print("\n⚠️ Bu taramada yeni (daha önce gönderilmemiş) sinyal bulunamadı.")
