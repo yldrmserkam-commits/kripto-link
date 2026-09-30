@@ -27,5 +27,8 @@
     "HAEDALUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "IBMBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "MEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "SUNUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "SUNUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ARKUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "USD1USDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "GOOGLBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
