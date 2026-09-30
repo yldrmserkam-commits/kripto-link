@@ -102,5 +102,8 @@
     "EIGENUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "BTCUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "ETHUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "SCUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "SCUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "FDUSDUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "TUSDUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "FDUSDUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
