@@ -201,5 +201,12 @@
     "ACEUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "GPROBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "BFUSDUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "BREVUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "BREVUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ICPUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SSVUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ANKRUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ARPAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "GRTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BICOUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ASTRUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
