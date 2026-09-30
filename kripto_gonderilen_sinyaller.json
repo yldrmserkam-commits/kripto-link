@@ -195,5 +195,7 @@
     "ALABBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "DJTBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "CRWDBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "QIUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "QIUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "FRAXUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SPCXBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
