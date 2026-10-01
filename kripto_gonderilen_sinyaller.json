@@ -70,5 +70,11 @@
     "PEPEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "RADUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "ADXUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "MOVRUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "MOVRUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SPCXBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "MRNABUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "COINBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "MRNABUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "AGPUBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "FWDIBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
