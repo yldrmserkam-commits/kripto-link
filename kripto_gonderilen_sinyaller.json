@@ -141,5 +141,9 @@
     "KATUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "COTIUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "UNIUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "KAIAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "KAIAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "PUNDIXUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "WBTCUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BABYUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SAPIENUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
