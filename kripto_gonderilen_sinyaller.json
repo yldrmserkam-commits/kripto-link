@@ -59,5 +59,13 @@
     "ETHUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "QUICKUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "WBETHUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "AGPUBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "AGPUBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "REDUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "TUTUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "OGNUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "KSMUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "AAVEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "INJUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SUIUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "PEPEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
