@@ -91,5 +91,9 @@
     "BELUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "AXSUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "TKOUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "SPELLUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "SPELLUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "CHZUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "YFIUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "TURBOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "NEOUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
