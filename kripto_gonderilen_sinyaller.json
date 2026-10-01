@@ -234,5 +234,7 @@
     "SXTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "WENBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "PYPLBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "USDEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "USDEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "REDUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ZMBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
