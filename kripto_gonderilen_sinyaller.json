@@ -32,5 +32,7 @@
     "ARKUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "MEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "BREVUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "KATUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "KATUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "COMPUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "XNOUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
