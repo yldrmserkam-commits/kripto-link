@@ -63,5 +63,7 @@
     "QKCUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "PYPLBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "AIUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "ATMUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "ATMUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ZILUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "GENIUSUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
