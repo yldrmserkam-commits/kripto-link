@@ -136,5 +136,6 @@
     "RENDERUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "FWDIBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "NMRUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "JUVUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "JUVUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "AAVEUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
