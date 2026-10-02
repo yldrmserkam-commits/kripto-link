@@ -130,5 +130,8 @@
     "MINAUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "SAGAUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "USDCUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "STOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "STOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "PARTIUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "DCRUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "RENDERUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
