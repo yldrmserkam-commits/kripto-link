@@ -1,7 +1,8 @@
-import time
-import os
 import json
+import os
+import time
 import warnings
+from datetime import datetime
 import numpy as np
 import pandas as pd
 import requests
@@ -10,44 +11,59 @@ from tqdm import tqdm
 warnings.filterwarnings('ignore')
 
 # --- SİNYAL TAKİP DOSYASI AYARI (GitHub Actions State Koruması) ---
-STATE_FILE = "kripto_gonderilen_sinyaller.json"
+STATE_FILE = 'kripto_gonderilen_sinyaller.json'
 
 def sinyalleri_yukle():
+    bugun = datetime.now().strftime('%Y-%m-%d')
     if os.path.exists(STATE_FILE):
         try:
-            with open(STATE_FILE, "r", encoding="utf-8") as f:
+            with open(STATE_FILE, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                bugun = time.strftime('%Y-%m-%d')
-                if data.get("_tarih") != bugun:
-                    return {"_tarih": bugun}
+                if data.get('_tarih') != bugun:
+                    return {'_tarih': bugun}
                 return data
         except Exception:
-            return {"_tarih": time.strftime('%Y-%m-%d')}
-    return {"_tarih": time.strftime('%Y-%m-%d')}
+            return {'_tarih': bugun}
+    return {'_tarih': bugun}
 
 def sinyalleri_kaydet(state):
     try:
-        with open(STATE_FILE, "w", encoding="utf-8") as f:
+        with open(STATE_FILE, 'w', encoding='utf-8') as f:
             json.dump(state, f, ensure_ascii=False, indent=4)
     except Exception as e:
-        print(f"Durum dosyası kaydedilemedi: {e}")
+        print(f'Durum dosyası kaydedilemedi: {e}')
 
-# --- KRİPTO AYARLARI ---
+# --- PERİYOT AYARLARI ---
+TARAMA_15DK = True
+TARAMA_30DK = True
+TARAMA_1SAAT = False  
+TARAMA_4SAAT = False  
+TARAMA_GUNLUK = False 
+
 TARAMA_YAPILACAK_PERIYOTLAR = {
-    "15 Dakikalık": True,
-    "30 Dakikalık": True,
-    "1 Saatlik":    False,
-    "4 Saatlik":    False,
-    "Günlük":       False,
+    "15 Dakikalık": TARAMA_15DK,
+    "30 Dakikalık": TARAMA_30DK,
+    "1 Saatlik":    TARAMA_1SAAT,
+    "4 Saatlik":    TARAMA_4SAAT,
+    "Günlük":       TARAMA_GUNLUK,
 }
 
+# --- İNDİKATÖR PARAMETRELERİ ---
 EMA_HIZLI = 5
 EMA_YAVAS = 8
 EMA_TREND = 20      
 RSI_PERIYOT = 14  
-ADX_PERIYOT = 14   
+ADX_PERIYOT = 14    
 
-# 🚀 HAFIZA YÜKLEMESİ (Coin + Periyot Bazlı Günlük Kısıtlama)
+PERIYOT_AYARLARI = {
+    "15 Dakikalık": {"interval": "15m", "limit": 120},
+    "30 Dakikalık": {"interval": "30m", "limit": 120},
+    "1 Saatlik":    {"interval": "1h",  "limit": 120},
+    "4 Saatlik":    {"interval": "4h",  "limit": 120},
+    "Günlük":       {"interval": "1d",  "limit": 120}
+}
+
+# 🚀 HAFIZA YÜKLEMESİ
 gonderilenler = sinyalleri_yukle()
 
 # Telegram Bildirim Ayarları
@@ -65,14 +81,6 @@ def telegram_mesaj_gonder(mesaj):
         time.sleep(0.3)
     except Exception as e:
         print(f"Telegram mesajı gönderilemedi: {e}")
-
-PERIYOT_AYARLARI = {
-    "15 Dakikalık": {"interval": "15m", "limit": 120},
-    "30 Dakikalık": {"interval": "30m", "limit": 120},
-    "1 Saatlik":    {"interval": "1h",  "limit": 120},
-    "4 Saatlik":    {"interval": "4h",  "limit": 120},
-    "Günlük":       {"interval": "1d",  "limit": 120}
-}
 
 def binance_aktif_usdt_listesini_getir():
     urls = [
@@ -219,7 +227,7 @@ for periyot_adi, aktif_mi in TARAMA_YAPILACAK_PERIYOTLAR.items():
             if not obv_kosulu:
                 continue
 
-            # 🚀 6. TEKRARLI BİLDİRİMİ ENGELLEME (Coin + Periyot Bazlı Günlük Kısıtlama)
+            # 🚀 6. TEKRARLI BİLDİRİMİ ENGELLEME
             sinyal_kimligi = f"{ticker}_{periyot_adi}_EMA_RSI_ADX_OBV"
 
             if sinyal_kimligi in gonderilenler:
