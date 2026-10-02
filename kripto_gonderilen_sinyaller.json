@@ -59,5 +59,7 @@
     "CYBERUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "ETHFIUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "ARMBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "HUMAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "HUMAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "QKCUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "PYPLBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
