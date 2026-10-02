@@ -85,5 +85,9 @@
     "LUMIAUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "SOLVUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "HEIUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "DYDXUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "DYDXUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BARDUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "GSBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "CRWDBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "CRMBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
