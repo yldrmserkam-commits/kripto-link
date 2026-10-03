@@ -44,5 +44,18 @@
     "ALABBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "OPUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "DCRUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "LDOUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "LDOUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "METUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "MSFTBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BEBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "DOTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "PENDLEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SEIUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "PYTHUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "CUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "XPLUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "METUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "MANTRAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "USDSUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BEBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
