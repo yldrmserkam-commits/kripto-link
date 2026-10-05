@@ -77,5 +77,7 @@
     "OGUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "TUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "BIGTIMEUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "LAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "LAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "1INCHUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "FLOWUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
