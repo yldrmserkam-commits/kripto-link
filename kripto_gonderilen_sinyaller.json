@@ -18,5 +18,11 @@
     "SEIUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "SENTUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "OPGUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "OPGUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "OPGUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "NMRUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "VIRTUALUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "HEMIUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "FRAXUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "DCRUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "FRAXUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
