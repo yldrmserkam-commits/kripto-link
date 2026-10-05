@@ -48,5 +48,7 @@
     "DOGSUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "ERAUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "IRENBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "TWTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "TWTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SPYBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "RDDTBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
