@@ -95,5 +95,10 @@
     "ALPINEUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "ACMUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "USDEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "IMXUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "IMXUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BCHUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "CHRUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "DOTUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "EIGENUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ENSOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
