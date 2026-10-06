@@ -100,5 +100,7 @@
     "CHRUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "DOTUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "EIGENUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "ENSOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "ENSOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "RLUSDUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "TWTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
