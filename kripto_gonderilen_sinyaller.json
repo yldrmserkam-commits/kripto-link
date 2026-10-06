@@ -29,5 +29,10 @@
     "AGPUBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "CVXUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "GASUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "JUPUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "JUPUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SEIUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "EURUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ARUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ETHFIUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BANANAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
