@@ -81,5 +81,11 @@
     "DELLBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "CRMBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "ADBEBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "HPEBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "HPEBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "VELODROMEUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "TRUMPUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ONDOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "AEROUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "AMCBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "PAXGUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
