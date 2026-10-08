@@ -30,5 +30,10 @@
     "MORPHOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "FUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "BREVUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "FETUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "FETUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "COTIUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BELUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "PUNDIXUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "JTOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BOMEUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
