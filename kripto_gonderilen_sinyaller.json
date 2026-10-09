@@ -130,5 +130,9 @@
     "CHIPUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "MSTRBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "FWDIBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "ORCLBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "ORCLBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "FILUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "FDUSDUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "FWDIBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "UMAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
