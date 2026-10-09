@@ -140,5 +140,8 @@
     "SPYBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "TRXUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "JPMBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "RONINUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "RONINUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "LUNAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SUSHIUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ICPUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
