@@ -134,5 +134,10 @@
     "FILUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "FDUSDUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "FWDIBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "UMAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "UMAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SANTOSUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "XNOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SPYBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "TRXUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "JPMBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
