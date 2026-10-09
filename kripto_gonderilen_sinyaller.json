@@ -71,5 +71,10 @@
     "SYNUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "QUICKUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "ALGOUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "PYPLBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "PYPLBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SUNUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "CVCUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "LSKUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "AAVEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SAGAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
