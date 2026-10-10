@@ -46,5 +46,6 @@
     "CVCUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "TSTUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "AGPUBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "NILUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "NILUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "NBISBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
