@@ -129,5 +129,6 @@
     "CELRUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "INITUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "USD1USDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "BANKUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "BANKUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "PARTIUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
