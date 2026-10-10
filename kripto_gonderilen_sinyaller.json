@@ -97,5 +97,9 @@
     "RDDTBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "YBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "ASRUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "SAGAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "SAGAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BANANAUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "TURBOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "TNSRUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "TUTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
