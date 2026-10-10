@@ -122,5 +122,7 @@
     "HYPEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "HPEBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "BOMEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "ORCLBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "ORCLBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "GRAMUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "TQQQBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
