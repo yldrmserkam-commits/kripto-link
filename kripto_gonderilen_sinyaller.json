@@ -102,5 +102,7 @@
     "TURBOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "TNSRUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "TUTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "BICOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "BICOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SMCIBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "VIRTUALUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
