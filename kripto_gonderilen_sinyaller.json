@@ -119,5 +119,7 @@
     "SUNUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "POWRUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "THEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "TUTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "TUTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "DIAUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "USARBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
