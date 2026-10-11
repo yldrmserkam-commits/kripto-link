@@ -86,5 +86,7 @@
     "1000CATUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "IOSTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "AAVEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "SHAZBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "SHAZBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "CHIPUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "DOTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
