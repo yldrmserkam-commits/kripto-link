@@ -128,5 +128,9 @@
     "MANAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "YGGUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "SOLVUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "PROVEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "PROVEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "STRKUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ENSOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "VANAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "DJTBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
