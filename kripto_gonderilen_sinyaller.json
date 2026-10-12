@@ -65,5 +65,8 @@
     "HEIUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "MSFTBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "ASTSBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "ARBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "ARBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SIGNUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "DCRUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "AXLUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
