@@ -77,5 +77,9 @@
     "PIXELUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "DYMUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "GMTUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "IQUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "IQUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "RAYUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "JUVUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "PSGUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "RIFUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
