@@ -25,5 +25,9 @@
     "IBMBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "PLTRBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "MEGAUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "AMCBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "AMCBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "USDSUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "CGPTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "LINEAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "USDSUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
