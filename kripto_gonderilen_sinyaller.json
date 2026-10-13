@@ -92,5 +92,9 @@
     "GTCUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "TSLABUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "COINBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "GLMRUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "GLMRUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "JOEUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ARBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SOPHUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "EULUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
