@@ -197,5 +197,8 @@
     "MIRAUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "FFUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "JSTUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "CFXUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "CFXUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SSVUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "HAEDALUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "CBRSBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
