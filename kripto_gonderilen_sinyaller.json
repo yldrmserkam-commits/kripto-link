@@ -13,5 +13,7 @@
     "QNTUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "QNTBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "MUBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "SNDKBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "SNDKBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "SPYBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "WAXPUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
