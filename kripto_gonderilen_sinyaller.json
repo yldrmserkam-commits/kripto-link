@@ -49,5 +49,8 @@
     "NEIROUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "QUICKUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "JASMYUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "GMXUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "GMXUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "GNOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "CITYUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "CITYUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
