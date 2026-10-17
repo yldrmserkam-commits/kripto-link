@@ -44,5 +44,7 @@
     "PDDBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "ATMUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "QKCUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "PAXGUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "PAXGUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "PORTOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "LAZIOUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
