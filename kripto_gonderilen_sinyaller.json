@@ -41,5 +41,8 @@
     "BTCUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "MDBBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "GNOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "PDDBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "PDDBUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ATMUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "QKCUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "PAXGUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
