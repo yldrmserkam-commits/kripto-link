@@ -66,5 +66,11 @@
     "HUMAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "RLUSDUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "TFUELUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "PROMUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "PROMUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "KAVAUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "FDUSDUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "IQUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "IOTAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "MASKUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "MRNABUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
