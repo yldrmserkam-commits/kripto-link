@@ -59,5 +59,7 @@
     "SANDUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "JPMBUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
     "GLMRUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "ALPINEUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "ALPINEUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BARUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BARUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
