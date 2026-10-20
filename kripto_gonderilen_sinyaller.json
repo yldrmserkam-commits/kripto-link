@@ -61,5 +61,9 @@
     "GLMRUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "ALPINEUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "BARUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "BARUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
+    "BARUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "TRXUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ZENUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "FILUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "TAOUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
 }
