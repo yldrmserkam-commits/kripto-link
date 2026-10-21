@@ -2,5 +2,13 @@
     "_tarih": "2026-10-21",
     "ONTUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
     "LQTYUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
-    "THEUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true
+    "THEUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "BANDUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "MANAUSDT_15 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "MANAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "NMRUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "THEUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "HEIUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "LINEAUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true,
+    "ZKCUSDT_30 Dakikalık_EMA_RSI_ADX_OBV": true
 }
